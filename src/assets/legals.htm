@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L'École de la Voie Martiale</title>
+    
+    <style>
+      :root {
+        --blue: #001f3f; /* Deeper Blue */
+        --yellow: #f0c14b; /* Orange */
+        --red: #c41e3a; /* Red */
+        --green: #228b22; /* Green */
+        --black: #333;
+        --white: #fff;
+        
+        --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        --font-heading: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        --transition: all 0.3s ease;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      p,h1,h2,h3 {
+        line-height: 1.5em;
+      }
+      
+      .hrule {
+        margin-top: var(--hrule);
+      }
+      hr.hrule { visibility: hidden; }
+      
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 7em; /* decided as an heuristic based on the banner height */
+        color: var(--blue);
+      }
+      
+      body{
+        min-width: 400px;
+        overflow-x: scroll;
+      }
+      
+      a {
+        color: inherit;
+        text-decoration: underline;
+        
+        &:hover {
+          color: var(--red);
+        }
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      th, td {
+        padding: 1em;
+        text-align: center;
+        border: 1px solid #eee;
+      }
+
+      th {
+        background-color: var(--blue);
+        color: white;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+        font-family: var(--font-main);
+      }
+      
+      .banner {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        
+        background-color: var(--blue);
+        color: var(--white);
+        padding: 1em 0;
+        
+        address {
+          font-size: 1.5em;
+          font-style: normal;
+          
+          small {
+            color: var(--yellow);
+            font-size: 0.7em;
+          }
+        }
+        
+        /* Responsible for displaying in two columns aligned vertically */
+        .container {
+          align-items: center;
+          justify-content: space-between;
+        }
+      }
+      
+      .footer {
+        background-color: var(--blue);
+        padding: 3em 1em;
+        color: var(--white);
+        
+        .light-text-color {
+          color: #cccccc;
+        }
+        
+        a {
+          text-decoration: none;
+          
+          &:hover {
+            color: var(--yellow);
+          }
+        }
+        
+        li {
+          list-style-type: none;
+          margin-bottom: 1em;
+        }
+      }
+      
+      .columns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3em;
+        
+        .column {
+          flex: 1;
+        }
+        
+        .column-2 {
+          flex: 2;
+        }
+        
+        &.center{
+          justify-content: center;
+        }
+      }
+      
+      .horizontal-menu {
+        li {
+          display: inline-block;
+          margin-left: 1em;
+        }
+        a {
+          text-decoration: none;
+          position: relative;
+          color: white;
+          padding-bottom: 4px;
+
+          &::after {
+            content: '';
+            display: inline-block;
+            height: 2px;
+            width: 0;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+          
+            transition: var(--transition);
+            background-color: var(--yellow);
+          }
+          
+          &:hover {
+            color: var(--yellow);
+          }
+          
+          &:hover::after {
+            width: 100%;
+          }
+        }
+      }
+      
+      .btn {
+        display: inline-block;
+        color: black;
+        padding: 0.4em 0.8em;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        
+        &:hover {
+          transform: translateY(-2px);
+        }
+        
+        &.primary {
+          background-color: var(--red);
+          color: white;
+          padding: 0.8em 1.4em;
+          
+          &:hover {
+            background-color: #a01a2f;
+          };
+        }
+        
+        a {
+          text-decoration: none;
+        }
+      }
+      
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        
+        background: linear-gradient(rgba(0,10,21,0.5), rgba(0,10,21,0.3)), url("wall-paper.jpg");
+        background-size: cover;
+        background-position: center;
+        color: var(--white);
+        
+        font-size: 1.2em;
+        
+        h1 {
+          font-size: 2.5em;
+        }
+        
+        b {
+          font-size: 1.5em;
+        }
+      }
+      
+      .feature {
+        border-radius: 4px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        padding: 1em;
+        border-left: 4px solid var(--green);
+      }
+      
+      .card {
+        background-color: var(--white);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        min-width: 250px;
+        max-width: 300px;
+        border-top: 4px solid var(--green);
+        
+        .card-image {
+          height: 200px;
+          background-size: cover;
+          background-position: center;
+          margin-bottom: 1em;
+        }
+        
+        .card-content {
+          margin: 1em;
+        }
+      }
+      
+      .center{text-align: center;}
+      
+      h2 {
+        text-align: center;
+        font-size: 2em;
+        position: relative;
+        padding-bottom: 0.8em;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 4px;
+          background-color: black;
+        }
+      }
+      
+      .contact-form {
+        min-width: 300px;
+        background-color: var(--white);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .contact-info {
+        min-width: 300px;
+        background-color: var(--blue);
+        color: var(--white);
+        padding: 2rem;
+        border-radius: 8px;
+        
+        h3 {
+          color: var(--yellow);
+        }
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: inherit;
+      }
+
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: var(--green);
+      }
+      
+      .about {
+        .about-features {
+          display: flex;
+          gap: 2em;
+          flex-direction: column;
+        }
+      }
+      .greyed {
+        background-color: #f5f5f5;
+        padding-top: 3em;
+        padding-bottom: 3em;
+      }
+      
+      .newsletter-form {
+        display: flex;
+        
+        input {
+          flex: 1;
+          padding: 0.8rem;
+          border: none;
+          border-radius: 4px 0 0 4px;
+        }
+
+        button {
+          border-radius: 0 4px 4px 0;
+          color: inherit;
+          background-color: var(--green);
+        }
+
+        button:hover {
+          background-color: #1a6b1a;
+        }
+      }
+      
+      .word{
+        font-variant: small-caps;
+      }
+      
+      .timeline {
+        position: relative;
+        
+        .timeline-slot {
+          position: relative;
+          width: 50%;
+          padding: 16px;
+          
+          &.right {
+            margin-left: 50%;
+            
+            .timeline-number {
+              left: -25px;
+            }
+          }
+          &.left {
+            .timeline-number {
+              right: -29px;
+            }
+          }
+        }
+        
+        .container {
+          border: 0px solid var(--blue);
+          border-radius: 4px;
+          padding: 1em;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+          
+        .timeline-number {
+          position: absolute;
+          top: 1em;
+          width: 54px;
+          line-height: 50px;
+          font-size: 24px;
+          height: 54px;
+          text-align: center;
+          border-radius: 50%;
+          border: 2px solid var(--blue);
+          background-color: var(--white);
+        }
+        
+        &::after {
+          content: '';
+          width: 4px;
+          background-color: var(--blue);
+          height: 100%;
+          position: absolute;
+          left: 50%;
+          top: 0;
+          z-index: -1;
+        }
+      }
+      
+      .me-pfp {
+        border-radius: 50%;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        background-size: cover;
+        background-position: center;
+        width: 150px;
+        height: 200px;
+        margin: 3em auto 1em;
+      }
+      
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        
+        .columns {
+          flex-direction: column;
+        }
+        
+        .banner {
+          text-align: center;
+        }
+        
+        #schedule {
+          text-align: center;
+          
+          .columns .column {
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+        
+        .timeline {
+          .timeline-slot {
+            position: relative;
+            width: 100%;
+          
+            &.right, &.left {
+              margin: 0 16px 0;
+            
+              .timeline-number {
+                left: -41px;
+              }
+            }
+          }
+        
+          &::after {
+            left: 0;
+          }
+
+        }
+      }
+
+      @media (max-width: 480px) {
+      }
+      
+      /* images */
+      .image-welcome { background-image: url('./src_folders.jpg'); }
+      .image-contract { background-image: url('./src_contrat.png'); }
+      .image-adults{background-image: url('./src_Seminar_17.jpg');}
+      .image-children{background-image: url('./src_children.jpg')}
+      .image-mepfp{background-image: url('./me_dobok.png');}
+    </style>
+  </head>
+  <body>
+    <div class="banner">
+      <div class="container columns">
+        <div>
+          <address>
+            <span class="word">Euro&#160;Tang&#160;Soo&#160;Do&#160;Belgium</span><br>
+            <small>ASBL L'École de la Voie Martiale</small>
+          </address>
+        </div>
+        <nav class="horizontal-menu">
+          <ul>
+            <li><a href="/">Retour au site</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+    <section id="about" class="about" data-hrule="5em">
+      <div class="container">
+        <h2>Mentions légales</h2>
+            <h3>1. Informations Légales</h3>
+        
+            <p>Conformément à la loi belge, voici les informations obligatoires concernant le site
+              internet de <strong>L'École de la Voie Martiale</strong> :</p>
+            <ul>
+                <li><strong>Nom du club&#160;:</strong> Tang Soo Do Gembloux</li>
+                <li><strong>Nom de l'ASBL&#160;:</strong> L'École de la Voie Martiale ASBL</li>
+                <li><strong>Siège social&#160;:</strong> Rue Elisabeth n44, 5030 Gembloux, Belgique</li>
+                <li><strong>Numéro d'entreprise&#160;:</strong> 1020174239</li>
+                <li><strong>Adresse e-mail&#160;:</strong> info@voie-martiale.be</li>
+                <li><strong>Numéro de téléphone&#160;:</strong> ...</li>
+                <li><strong>Responsable de la publication&#160;:</strong> Justin Dekeyser</li>
+                <li><strong>Hébergeur du site&#160;:</strong> <a href="https://www.o2switch.fr" target="_blank">O2Switch</a></li>
+            </ul>
+    
+            <h3>2. Propriété Intellectuelle</h3>
+            <p>Tous les contenus présents sur ce site (textes, images, vidéos, logos, etc.) sont la propriété exclusive de <strong>L'École de la Voie Martiale ASBL</strong> ou sont utilisés avec autorisation ou conformément aux licenses d'utilisation. Toute reproduction ou utilisation sans autorisation est interdite.</p>
+    
+            <h3>3. Protection des Données Personnelles</h3>
+            <p>Le club sportif respecte la réglementation en vigueur sur la protection des données personnelles (RGPD). Les informations collectées sur ce site sont destinées à des fins de gestion des membres et d’amélioration des services. Vous disposez d’un droit d’accès, de rectification et de suppression de vos données en contactant <strong>info@voie-martiale.be</strong>.</p>
+    
+            <h3>4. Cookies</h3>
+            <p>Ce site n'utilise pas de cookies.</p>
+    
+            <h3>5. Responsabilité</h3>
+            <p>Le club sportif met tout en œuvre pour assurer l'exactitude des informations diffusées sur ce site, mais ne peut être tenu responsable en cas d'erreurs ou d'omissions. L'utilisation du site est sous l'entière responsabilité de l'utilisateur.</p>
+    
+            <h3>6. Droit Applicable et Litiges</h3>
+            <p>Les présentes mentions légales sont soumises au droit belge. En cas de litige, le <strong>Tribunal de l'entreprise de Liège, division Namur</strong> sera compétent.</p>
+    
+            <hr>
+            <p>Pour toute question relative aux mentions légales, veuillez contacter <strong>info@voie-martiale.be</strong>.</p>
+      </div>
+    </section>
+    
+    <footer data-hrule="7em" class="footer">        
+        <div class="center">
+          <p>
+            &copy; 2025 L'École de la Voie Martiale ASBL. Tous droits réservés.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const hruleElements = document.querySelectorAll("*[data-hrule]");
+      for(const element of hruleElements) {
+        const ruleAttribute = element.getAttribute("data-hrule") || "1em";
+        element.classList.add("hrule");
+        element.style.setProperty("--hrule", ruleAttribute);
+      }
+    </script>
+  </body>
+</html>
