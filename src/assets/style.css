@@ -53,13 +53,14 @@ hr.hrule { visibility: hidden; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7em; /* decided as an heuristic based on the banner height */
+  scroll-padding-top: 8em; /* decided as an heuristic based on the banner height */
   color: var(--blue);
 }
 
 body{
-  min-width: 400px;
+  min-width: 500px;
   overflow-x: scroll;
+  font-size: 18px;
 }
 
 a {
@@ -102,19 +103,53 @@ tr:nth-child(even) {
   font-family: var(--font-main);
 }
 
+.badge {
+  background-size: cover;
+  background-position: center;
+  display: block;
+  height: 120px;
+  width: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 3em;
+}
+
+.contact-area{
+  text-align: center;
+  
+  ul{
+    list-style-type:none;
+  }
+}
+
+.columns.center-attraction {
+  .column{
+    &:nth-child(1){
+      text-align: right;
+    }
+    
+    &:nth-child(2){
+      text-align: left;
+    }
+  }
+}
+
 .banner {
-  position: fixed;
-  top: 0;
-  left: 0;
+  &.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 4;
+  }
+  
   width: 100%;
-  z-index: 4;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   
   background-color: var(--blue);
   color: var(--white);
   padding: 1em 0;
   
-  address {
+  .banner-address {
     font-size: 1.5em;
     font-style: normal;
     
@@ -122,6 +157,10 @@ tr:nth-child(even) {
       color: var(--yellow);
       font-size: 0.7em;
     }
+    
+    gap: 1em;
+    
+    align-items: center;
   }
   
   /* Responsible for displaying in two columns aligned vertically */
@@ -173,6 +212,8 @@ tr:nth-child(even) {
 }
 
 .horizontal-menu {
+  text-align:right;
+  
   li {
     display: inline-block;
     margin-left: 1em;
@@ -231,10 +272,9 @@ tr:nth-child(even) {
       background-color: #a01a2f;
     };
   }
-  
-  a {
-    text-decoration: none;
-  }
+}
+a.btn {
+  text-decoration: none;
 }
 
 .hero {
@@ -243,7 +283,7 @@ tr:nth-child(even) {
   align-items: center;
   text-align: center;
   
-  background: linear-gradient(rgba(0,10,21,0.5), rgba(0,10,21,0.3)), url("img/wall-paper.jpg");
+  background: linear-gradient(rgba(0,10,21,0.6), rgba(0,10,21,0.2)), url("img/wall-paper.jpg");
   background-size: cover;
   background-position: center;
   color: var(--white);
@@ -364,6 +404,7 @@ input:focus, select:focus, textarea:focus {
   padding-bottom: 3em;
 }
 
+/*
 .newsletter-form {
   display: flex;
   
@@ -384,9 +425,17 @@ input:focus, select:focus, textarea:focus {
     background-color: #1a6b1a;
   }
 }
+*/
 
 .word{
   font-variant: small-caps;
+}
+
+.box {
+  border: 0px solid var(--blue);
+  border-radius: 4px;
+  padding: 1em;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 .timeline {
@@ -409,13 +458,6 @@ input:focus, select:focus, textarea:focus {
         right: -29px;
       }
     }
-  }
-  
-  .container {
-    border: 0px solid var(--blue);
-    border-radius: 4px;
-    padding: 1em;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   }
     
   .timeline-number {
@@ -455,14 +497,32 @@ input:focus, select:focus, textarea:focus {
 
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  html {
+    scroll-padding-top: 12em; /* decided as an heuristic based on the banner height */
+  }
+  
   .banner{
-    position:sticky;
+    &.sticky{
+      position:sticky;
+    }
     text-align: center;
   }
   
   .columns {
     flex-direction: column;
+  }
+  
+  .columns.center-attraction {
+    .column{
+      &:nth-child(1){
+        text-align: inherit;
+      }
+    
+      &:nth-child(2){
+        text-align: inherit;
+      }
+    }
   }
   
   .hero {
@@ -509,7 +569,9 @@ aside {
   top: 0;
   left: 0;
   height: 100vh;
+  min-height: 500px;
   width: 100vw;
+  min-width: 500px;
   background-color: rgba(0,0,0,0.3);
   z-index: 16;
   
@@ -536,4 +598,7 @@ aside {
 .image-contract { background-image: url('./img/src_contrat.png'); }
 .image-adults{background-image: url('./img/src_Seminar_17.jpg');}
 .image-children{background-image: url('./img/src_children.jpg')}
+.image-all{background-image: url('./img/ETSD06.jpg')}
+.image-men{background-image: url('./img/2014_Seminar_07.jpg')}
 .image-mepfp{background-image: url('./img/me_dobok.jpg');}
+.image-eurotsd{background-image: url('./img/eurotsd-badge.png');}
